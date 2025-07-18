@@ -4,11 +4,16 @@ from .data import load_dataset, load_dataloader
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 import os
+from .utils import set_seed
+
+
+set_seed(42)
 
 
 if __name__ == "__main__":
     dataset_path = "./datasets"
-    model_path = "./saved_model/vae_model.pth"
+    model_path = "./saved_model/vae_model"
+    model_name = "_5_layers"
     batch_size = 100
     x_dim = 784
     hidden_dim = 400
@@ -32,7 +37,9 @@ if __name__ == "__main__":
     model = load_model(
         input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim, is_training=False
     ).to(device)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
+    model.load_state_dict(
+        torch.load(model_path + model_name + ".pth", map_location=torch.device(device))
+    )
 
     _, test_dataset = load_dataset(dataset_path)
     test_dataloader = load_dataloader(

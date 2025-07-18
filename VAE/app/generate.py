@@ -4,6 +4,10 @@ from .train import load_model
 import matplotlib.pyplot as plt
 from torchvision.utils import save_image
 import numpy as np
+from .utils import set_seed
+
+
+set_seed(42)
 
 
 def show_image(x, idx):
@@ -15,7 +19,8 @@ def show_image(x, idx):
 
 if __name__ == "__main__":
     dataset_path = "./datasets"
-    model_path = "./saved_model/vae_model.pth"
+    model_path = "./saved_model/vae_model"
+    model_name = "_5_layers"
     batch_size = 100
     x_dim = 784
     hidden_dim = 400
@@ -38,7 +43,9 @@ if __name__ == "__main__":
     model = load_model(
         input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim, is_training=False
     ).to(device)
-    model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
+    model.load_state_dict(
+        torch.load(model_path + model_name + ".pth", map_location=torch.device(device))
+    )
 
     model.eval()
 
@@ -46,7 +53,10 @@ if __name__ == "__main__":
     with torch.no_grad():
         generated_images = model.decoder(noise)
 
-    save_image(generated_images.view(batch_size, 1, 28, 28), "generated_sample.png")
+    save_image(
+        generated_images.view(batch_size, 1, 28, 28),
+        project_root + "/results/generated_sample" + model_name + ".png",
+    )
 
     z1 = torch.randn(1, latent_dim).to(device)
     z2 = torch.randn(1, latent_dim).to(device)
@@ -63,5 +73,7 @@ if __name__ == "__main__":
 
     # 한 줄로 이미지 저장 (num_steps, 1, 28, 28)
     save_image(
-        generated_images.view(num_steps, 1, 28, 28), "interpolated.png", nrow=num_steps
+        generated_images.view(num_steps, 1, 28, 28),
+        project_root + "/results/interpolated" + model_name + ".png",
+        nrow=num_steps,
     )

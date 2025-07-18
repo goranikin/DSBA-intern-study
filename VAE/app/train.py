@@ -4,6 +4,10 @@ from torch.optim import Adam
 from .data import load_dataset, load_dataloader
 from .trainer import VaeTrainer
 from .loss import loss_function
+from .utils import set_seed
+
+
+set_seed(42)
 
 
 def load_model(input_dim, hidden_dim, latent_dim, is_training=True):
@@ -55,6 +59,6 @@ if __name__ == "__main__":
         epochs=epochs,
         device=device,
         train_loader=train_dataloader,
-        model_name="_5_layers",
+        model_name="original",
     )
     trainer.train_epochs()
