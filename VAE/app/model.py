@@ -21,6 +21,7 @@ class Encoder(nn.Module):
 
         return mean, log_variance
 
+
 class Decoder(nn.Module):
     def __init__(self, latent_dim, hidden_dim, output_dim):
         super().__init__()
@@ -37,6 +38,7 @@ class Decoder(nn.Module):
         x_hat = torch.sigmoid(self.fc_output(h_))
 
         return x_hat
+
 
 class VAE(nn.Module):
     def __init__(self, encoder, decoder, is_training=True):

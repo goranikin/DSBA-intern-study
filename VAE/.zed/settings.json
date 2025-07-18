@@ -1,0 +1,32 @@
+{
+  // languages configuration
+  // Python | TS | JS
+  "languages": {
+    // add ty when it'll be served
+    "Python": {
+      "language_servers": ["ruff"],
+      "formatter": [
+        {
+          "code_actions": {
+            "source.fixAll.ruff": true,
+            "source.organizeImports.ruff": false,
+            "source.addMissingImports.ruff": true,
+            "source.sortImports.ruff": true
+          }
+        },
+        {
+          "language_server": { "name": "ruff" }
+        }
+      ]
+    }
+  },
+
+  // Language server protocol
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python.pythonPath": ".venv/bin/python"
+      }
+    }
+  }
+}

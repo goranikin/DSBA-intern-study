@@ -12,10 +12,11 @@ def show_image(x, idx):
     fig = plt.figure()
     plt.imshow(x[idx].cpu().numpy())
 
+
 if __name__ == "__main__":
-    dataset_path = './datasets'
+    dataset_path = "./datasets"
     batch_size = 100
-    x_dim  = 784
+    x_dim = 784
     hidden_dim = 400
     latent_dim = 200
     lr = 1e-3
@@ -34,11 +35,15 @@ if __name__ == "__main__":
     model_path = os.path.join(project_root, "saved_model", "vae_model.pth")
     dataset_path = os.path.join(project_root, dataset_path)
 
-    model = load_model(input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim, is_training=False).to(device)
+    model = load_model(
+        input_dim=x_dim, hidden_dim=hidden_dim, latent_dim=latent_dim, is_training=False
+    ).to(device)
     model.load_state_dict(torch.load(model_path, map_location=torch.device(device)))
 
     _, test_dataset = load_dataset(dataset_path)
-    test_dataloader = load_dataloader(test_dataset, batch_size=batch_size, shuffle=False)
+    test_dataloader = load_dataloader(
+        test_dataset, batch_size=batch_size, shuffle=False
+    )
 
     model.eval()
 
@@ -48,19 +53,16 @@ if __name__ == "__main__":
             x = x.to(device)
 
             x_hat, _, _ = model(x)
-            break
+            break  # Only process the first batch for evaluation
 
-    # 예시: 첫 8개 이미지
     n = 8
     plt.figure(figsize=(16, 4))
     for i in range(n):
-        # 원본
-        plt.subplot(2, n, i+1)
-        plt.imshow(x[i].cpu().reshape(28, 28), cmap='gray')
-        plt.axis('off')
-        # 복원
-        plt.subplot(2, n, n+i+1)
-        plt.imshow(x_hat[i].cpu().reshape(28, 28), cmap='gray')
-        plt.axis('off')
+        plt.subplot(2, n, i + 1)
+        plt.imshow(x[i].cpu().reshape(28, 28), cmap="gray")
+        plt.axis("off")
+        plt.subplot(2, n, n + i + 1)
+        plt.imshow(x_hat[i].cpu().reshape(28, 28), cmap="gray")
+        plt.axis("off")
     plt.tight_layout()
     plt.show()

@@ -2,22 +2,31 @@ from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader
 
-def load_dataset(dataset_path):
-    mnist_transform = transforms.Compose([
-            transforms.ToTensor(),
-    ])
 
-    train_dataset = MNIST(dataset_path, transform=mnist_transform, train=True, download=True)
-    test_dataset  = MNIST(dataset_path, transform=mnist_transform, train=False, download=True)
+def load_dataset(dataset_path):
+    mnist_transform = transforms.Compose(
+        [
+            transforms.ToTensor(),
+        ]
+    )
+
+    train_dataset = MNIST(
+        dataset_path, transform=mnist_transform, train=True, download=True
+    )
+    test_dataset = MNIST(
+        dataset_path, transform=mnist_transform, train=False, download=True
+    )
 
     return train_dataset, test_dataset
+
 
 def load_dataloader(dataset, batch_size, shuffle):
     return DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # for caching the dataset
-    dataset_path = './datasets'
+    dataset_path = "./datasets"
     train_dataset, test_dataset = load_dataset(dataset_path)
 
     print(f"Train dataset size: {len(train_dataset)}")
