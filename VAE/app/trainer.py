@@ -13,7 +13,7 @@ class VaeTrainer:
         epochs,
         device,
         train_loader: DataLoader,
-        test_loader: DataLoader,
+        model_name: str,
     ):
         self.model = model
         self.optimizer = optimizer
@@ -21,9 +21,7 @@ class VaeTrainer:
         self.loss_fn = loss_fn
         self.epochs = epochs
         self.device = device
-
         self.train_loader = train_loader
-        self.test_loader = test_loader
 
     def save_model(self, path="./saved_model/vae_model.pth"):
         torch.save(self.model.state_dict(), path)

@@ -55,6 +55,5 @@ if __name__ == "__main__":
         epochs=epochs,
         device=device,
         train_loader=train_dataloader,
-        test_loader=test_dataloader,
     )
     trainer.train_epochs()
