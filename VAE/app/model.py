@@ -8,6 +8,9 @@ class Encoder(nn.Module):
 
         self.fc_input = nn.Linear(input_dim, hidden_dim)
         self.fc_input2 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc_input3 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc_input4 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc_input5 = nn.Linear(hidden_dim, hidden_dim)
         self.fc_mean = nn.Linear(hidden_dim, latent_dim)
         self.fc_variance = nn.Linear(hidden_dim, latent_dim)
 
@@ -16,6 +19,9 @@ class Encoder(nn.Module):
     def forward(self, x):
         h_ = self.LeakyReLU(self.fc_input(x))
         h_ = self.LeakyReLU(self.fc_input2(h_))
+        h_ = self.LeakyReLU(self.fc_input3(h_))
+        h_ = self.LeakyReLU(self.fc_input4(h_))
+        h_ = self.LeakyReLU(self.fc_input5(h_))
         mean = self.fc_mean(h_)
         log_variance = self.fc_variance(h_)
 

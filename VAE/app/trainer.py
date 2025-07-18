@@ -22,9 +22,10 @@ class VaeTrainer:
         self.epochs = epochs
         self.device = device
         self.train_loader = train_loader
+        self.model_name = model_name
 
-    def save_model(self, path="./saved_model/vae_model.pth"):
-        torch.save(self.model.state_dict(), path)
+    def save_model(self, path="./saved_model/vae_model"):
+        torch.save(self.model.state_dict(), path + self.model_name + ".pth")
 
     def train_epochs(self):
         self.model.train()
@@ -56,6 +57,6 @@ class VaeTrainer:
 
         print("Trainig completed.")
 
-        save_path = "./saved_model/vae_model.pth"
+        save_path = "./saved_model/vae_model"
         self.save_model(path=save_path)
-        print(f"Model saved to {save_path}")
+        print("Model saved")
