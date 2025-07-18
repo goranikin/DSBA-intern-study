@@ -15,6 +15,7 @@ def show_image(x, idx):
 
 if __name__ == "__main__":
     dataset_path = "./datasets"
+    model_path = "./saved_model/vae_model.pth"
     batch_size = 100
     x_dim = 784
     hidden_dim = 400
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     current_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(current_dir)
 
-    model_path = os.path.join(project_root, "saved_model", "vae_model.pth")
+    model_path = os.path.join(project_root, model_path)
     dataset_path = os.path.join(project_root, dataset_path)
 
     model = load_model(
@@ -55,7 +56,7 @@ if __name__ == "__main__":
             x_hat, _, _ = model(x)
             break  # Only process the first batch for evaluation
 
-    n = 8
+    n = 8  # Number of images to display. You can change this value to display more or fewer images.
     plt.figure(figsize=(16, 4))
     for i in range(n):
         plt.subplot(2, n, i + 1)
