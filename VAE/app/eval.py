@@ -6,13 +6,6 @@ import matplotlib.pyplot as plt
 import os
 
 
-def show_image(x, idx):
-    x = x.view(batch_size, 28, 28)
-
-    fig = plt.figure()
-    plt.imshow(x[idx].cpu().numpy())
-
-
 if __name__ == "__main__":
     dataset_path = "./datasets"
     model_path = "./saved_model/vae_model.pth"
