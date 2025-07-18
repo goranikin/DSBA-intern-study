@@ -34,6 +34,9 @@ class Decoder(nn.Module):
 
         self.fc_hidden = nn.Linear(latent_dim, hidden_dim)
         self.fc_hidden2 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc_hidden3 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc_hidden4 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc_hidden5 = nn.Linear(hidden_dim, hidden_dim)
         self.fc_output = nn.Linear(hidden_dim, output_dim)
 
         self.LeakyReLU = nn.LeakyReLU(0.2)
@@ -41,6 +44,9 @@ class Decoder(nn.Module):
     def forward(self, x):
         h_ = self.LeakyReLU(self.fc_hidden(x))
         h_ = self.LeakyReLU(self.fc_hidden2(h_))
+        h_ = self.LeakyReLU(self.fc_hidden3(h_))
+        h_ = self.LeakyReLU(self.fc_hidden4(h_))
+        h_ = self.LeakyReLU(self.fc_hidden5(h_))
         x_hat = torch.sigmoid(self.fc_output(h_))
 
         return x_hat
