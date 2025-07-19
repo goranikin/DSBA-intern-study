@@ -17,12 +17,12 @@ def ensure_dir(path):
 if __name__ == "__main__":
     dataset_path = "./datasets"
     model_path = "saved_model/"
-    model_name = "vq_vae_model_64d_512emb"  # 학습 시 사용한 model_name과 일치해야 함
+    model_name = "vq_vae_model_64d_10emb"  # 학습 시 사용한 model_name과 일치해야 함
     batch_size = 128
     x_dim = 784
     hidden_dim = 400
     latent_dim = 64
-    num_embeddings = 512
+    num_embeddings = 10
     commitment_cost = 0.25
 
     if torch.cuda.is_available():

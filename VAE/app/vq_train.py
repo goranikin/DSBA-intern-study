@@ -35,7 +35,7 @@ if __name__ == "__main__":
     x_dim = 784
     hidden_dim = 400
     latent_dim = 64
-    num_embeddings = 512
+    num_embeddings = 10
     commitment_cost = 0.25  # 논문 기본값
     lr = 2e-4
     epochs = 30
